@@ -10,10 +10,8 @@ import {
   MenuItem,
   InputLabel,
   Typography,
-  Backdrop,
-  Modal,
-  Fade,
 } from "@mui/material";
+import ProductCreatedModal from "../components/ProductCreatedModal";
 import instance from "../components/AxiosInstance";
 
 function CreateProduct(props) {
@@ -24,18 +22,6 @@ function CreateProduct(props) {
     backgroundColor: "white",
     boxShadow: 2,
     borderRadius: "10px",
-  };
-
-  const modalStyles = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 500,
-    bgcolor: "background.paper",
-    borderRadius: "10px",
-    boxShadow: 24,
-    p: 4,
   };
 
   let navigate = useNavigate();
@@ -76,6 +62,7 @@ function CreateProduct(props) {
 
   useEffect(() => {
     updateCategories();
+    document.title = "Ayush - Create Product";
   }, []);
 
   return (
@@ -234,26 +221,7 @@ function CreateProduct(props) {
           </form>
         )}
       </Formik>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={modalStyles}>
-            <Typography variant="h6" component="h2" align="center">
-              Product Successfully created!
-            </Typography>
-            <Typography align="center">
-              Redirecting back to Home page!
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
+      <ProductCreatedModal open={open} handleClose={handleClose} />
     </Box>
   );
 }

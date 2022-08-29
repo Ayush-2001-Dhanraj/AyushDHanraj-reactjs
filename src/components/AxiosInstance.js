@@ -2,6 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://upayments-studycase-api.herokuapp.com/api/",
+  // token should be from env file but this is a test project
   headers: {
     Authorization:
       "Bearer " +

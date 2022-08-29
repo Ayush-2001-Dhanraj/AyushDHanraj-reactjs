@@ -8,6 +8,7 @@ import {
   CardMedia,
   Divider,
 } from "@mui/material";
+import LoadingComp from "../components/LoadingComp";
 import { WindMillLoading } from "react-loadingg";
 import { useTheme } from "@mui/material/styles";
 import instance from "../components/AxiosInstance";
@@ -30,12 +31,14 @@ function ProductPage(props) {
     updateProucts();
   }, [id]);
 
+  useEffect(() => {
+    document.title = "Ayush - Product Details";
+  }, []);
+
   return (
     <Box mb={2}>
       <Box mr={mobile ? 0 : 15} ml={mobile ? 0 : 15} mt={2}>
-        {Object.keys(productDetails).length === 0 && (
-          <WindMillLoading size="large" />
-        )}
+        {Object.keys(productDetails).length === 0 && <LoadingComp />}
         {Object.keys(productDetails).length !== 0 && (
           <>
             <Card
@@ -55,7 +58,7 @@ function ProductPage(props) {
                   borderRadius: "10px",
                 }}
                 image={productDetails?.avatar}
-                alt="Live from space album cover"
+                alt={productDetails?.name}
               />
 
               <CardContent
